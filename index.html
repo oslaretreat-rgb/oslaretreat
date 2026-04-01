@@ -191,6 +191,52 @@ nav h1{
     background-position: center 20%;
   }
 }
+
+/* WEATHER STATES (CINEMATIC) */
+
+/* 🌧️ Rain */
+.hero.rain::after{
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(11,29,26,0.65),
+      rgba(11,29,26,0.95)
+    ),
+    url("https://grainy-gradients.vercel.app/noise.svg");
+}
+
+/* ❄️ Snow */
+.hero.snow::after{
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(200,220,230,0.15),
+      rgba(11,29,26,0.85)
+    ),
+    url("https://grainy-gradients.vercel.app/noise.svg");
+}
+
+/* ☀️ Clear (enhance golden light) */
+.hero.clear::before{
+  background:
+    radial-gradient(
+      circle at 60% 30%,
+      rgba(198,167,105,0.18),
+      transparent 60%
+    ),
+    radial-gradient(
+      circle at 30% 60%,
+      rgba(255,255,255,0.05),
+      transparent 60%
+    );
+}
+
+/* 🌙 Night */
+.hero.night{
+  filter:brightness(0.8) contrast(1.05);
+}
+
+
 /* BUTTON */
 .btn{
   margin-top:15px;
@@ -611,6 +657,63 @@ body::after{
   opacity:0.85;
 }
 
+.weather-widget .temp{
+  font-size:28px;
+  font-weight:500;
+}
+
+.weather-widget .condition{
+  font-size:13px;
+  opacity:0.7;
+}
+/* WEATHER WIDGET PREMIUM */
+
+.weather-widget{
+  position:absolute;
+  top:110px;
+  right:50px;
+  z-index:3;
+  text-align:right;
+  color:#EAE3D2;
+  opacity:0;
+  transform:translateY(10px);
+  transition:all 0.8s ease;
+}
+
+.weather-widget.show{
+  opacity:0.75;
+  transform:translateY(0);
+}
+
+.weather-row{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  justify-content:flex-end;
+}
+
+.weather-widget .temp{
+  font-size:26px;
+  font-weight:500;
+}
+
+.weather-widget .condition{
+  font-size:13px;
+  opacity:0.7;
+}
+
+/* ICON ANIMATION (SUBTLE) */
+
+.icon{
+  font-size:20px;
+  display:inline-block;
+  animation:floatIcon 3s ease-in-out infinite;
+}
+
+@keyframes floatIcon{
+  0%,100%{ transform:translateY(0); }
+  50%{ transform:translateY(-1.5px); }
+}
 </style>
 </head>
 
@@ -644,6 +747,13 @@ body::after{
     <p>Experience untouched beauty of Osla Village</p>
     <button class="btn" onclick="scrollToSection()">Explore Stays</button>
   </div>
+  <div class="weather-widget" id="weatherWidget">
+  <div class="weather-row">
+    <span class="icon" id="weatherIcon">☀️</span>
+    <span class="temp" id="temp">--°C</span>
+  </div>
+  <div class="condition" id="condition">Loading...</div>
+</div>
 </section>
 
 <section class="section" id="stays">
@@ -969,5 +1079,73 @@ function raf(time) {
 
 requestAnimationFrame(raf);
 </script>
+
+<script>
+async function getWeather(){
+  const hero = document.querySelector(".hero");
+  const widget = document.getElementById("weatherWidget");
+
+  try{
+    const res = await fetch("https://api.weatherapi.com/v1/current.json?key=5aa1854718894a4eb2c141224260104&q=31.1191,78.3475");
+    const data = await res.json();
+
+    // ✅ CORRECT DATA ACCESS
+    const condition = data.current.condition.text;
+    const temp = Math.round(data.current.temp_c);
+    const wind = Math.round(data.current.wind_kph);
+
+    const hour = new Date().getHours();
+
+    let icon = "☀️";
+
+    // ✅ CONDITION CHECK (string-based)
+    if(condition.toLowerCase().includes("rain")){
+      hero.classList.add("rain");
+      icon = "🌧";
+    }
+    else if(condition.toLowerCase().includes("snow")){
+      hero.classList.add("snow");
+      icon = "❄️";
+    }
+    else if(condition.toLowerCase().includes("cloud")){
+      hero.classList.add("clear");
+      icon = "☁️";
+    }
+    else{
+      hero.classList.add("clear");
+      icon = "☀️";
+    }
+
+    // 🌙 NIGHT MODE
+    if(hour > 18 || hour < 6){
+      hero.classList.add("night");
+      if(!condition.toLowerCase().includes("rain")) icon = "🌙";
+    }
+
+    // ✅ UPDATE UI
+    document.getElementById("temp").innerText = temp + "°C";
+    document.getElementById("condition").innerText =
+      `${condition} in Osla`;
+    document.getElementById("weatherIcon").innerText = icon;
+
+  }catch(err){
+    console.log("Weather failed → fallback");
+
+    hero.classList.add("clear");
+
+    document.getElementById("temp").innerText = "--°C";
+    document.getElementById("condition").innerText = "Osla Weather";
+    document.getElementById("weatherIcon").innerText = "☀️";
+  }
+
+  // ✅ ALWAYS SHOW
+  setTimeout(()=>{
+    widget.classList.add("show");
+  }, 500);
+}
+
+getWeather();
+</script>
+
 </body>
 </html>
