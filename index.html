@@ -262,7 +262,9 @@ border-bottom:1px solid rgba(255,255,255,0.05);
   overflow:hidden;
   background:rgba(255,255,255,0.04);
   backdrop-filter:blur(12px);
-  transition:0.5s;
+   transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
   position:relative;
   cursor:pointer;
 }
@@ -273,6 +275,11 @@ border-bottom:1px solid rgba(255,255,255,0.05);
   inset:0;
   border-radius:18px;
   border:1px solid rgba(255,255,255,0.08);
+  transition:all 0.2s ease;
+}
+
+.card:active::after{
+  border:1px solid #C6A769;
 }
 
 .card:hover{
@@ -308,9 +315,6 @@ border-bottom:1px solid rgba(255,255,255,0.05);
 .price{
   font-size:14px;
   opacity:0.9;
-}
-.card:hover{
-  box-shadow:0 30px 80px rgba(0,0,0,0.8);
 }
 
 /* STORY */
@@ -585,22 +589,20 @@ body::after{
   line-height:1.7;
 }
 .card:hover{
-  transform:translateY(-10px) scale(1.02);
-  box-shadow:0 30px 80px rgba(0,0,0,0.8);
+  transform:translateY(-6px) scale(1.01);
+  box-shadow:
+    0 8px 20px rgba(0,0,0,0.25),
+    0 2px 6px rgba(0,0,0,0.2);
 }
 
-.card::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  border-radius:18px;
-  background:radial-gradient(circle at top, rgba(198,167,105,0.15), transparent 60%);
-  opacity:0;
-  transition:0.4s;
+
+.card:active{
+  transform:scale(0.985);
+  transition:transform 0.1s ease;
 }
 
-.card:hover::before{
-  opacity:1;
+.card.clicked::after{
+  border:1px solid #C6A769;
 }
 .hero h2{
   letter-spacing:1px;
@@ -608,6 +610,7 @@ body::after{
 .hero p{
   opacity:0.85;
 }
+
 </style>
 </head>
 
@@ -650,7 +653,7 @@ body::after{
 
     <div class="grid">
 
-     <div class="card" onclick="goToStay()">
+     <div class="card" onclick="goToStay(event)">
   <img src="https://images.unsplash.com/photo-1505691938895-1758d7feb511" loading="lazy">
   <div class="card-content">
     <h3>Negi Homestay</h3>
@@ -853,8 +856,14 @@ body::after{
   <p>© 2026 Osla Retreat • All Rights Reserved.</p>
 </footer>
 <script>
-function goToStay(){
-  window.location.href = "stay.html";
+function goToStay(e){
+  const card = e.currentTarget;
+
+  card.classList.add("clicked");
+
+  setTimeout(()=>{
+    window.location.href = "stay.html";
+  }, 150);
 }
 </script>
 <script>
