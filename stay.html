@@ -1,0 +1,528 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Negi Homestay | Osla Retreat</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+<style>
+body{
+  margin:0;
+  font-family:'Inter',sans-serif;
+  background:#0B1D1A;
+  color:#EAE3D2;
+}
+
+/* CONTAINER */
+.container{
+  max-width:1100px;
+  margin:auto;
+  padding:20px;
+}
+
+/* HEADER */
+.header{
+  padding:20px 0;
+}
+
+.header h1{
+  font-family:'Playfair Display';
+}
+
+/* GALLERY */
+.gallery{
+  display:grid;
+  grid-template-columns:2fr 1fr 1fr;
+  gap:10px;
+}
+
+.gallery img{
+  width:100%;
+  height:300px;
+  object-fit:cover;
+  border-radius:10px;
+}
+
+/* INFO */
+.info{
+  margin-top:40px;
+  display:grid;
+  grid-template-columns:2fr 1fr;
+  gap:40px;
+}
+
+.details h2{
+  font-family:'Playfair Display';
+}
+.details h2{
+  margin-bottom:10px;
+}
+
+.details p{
+  margin-bottom:15px;
+}
+.amenities{
+  border-top:1px solid rgba(255,255,255,0.08);
+  padding-top:20px;
+}
+/* CARD */
+.booking-card{
+  background:rgba(255,255,255,0.05);
+  padding:20px;
+  border-radius:12px;
+  backdrop-filter:blur(10px);
+  position:sticky;
+  top:100px;
+  box-shadow:0 20px 60px rgba(0,0,0,0.6);
+  border:1px solid rgba(255,255,255,0.08);
+}
+.booking-card:hover{
+  transform:translateY(-3px);
+  transition:0.3s;
+}
+.price{
+  color:#C6A769;
+  font-size:20px;
+}
+
+/* BUTTON */
+.btn{
+  margin-top:15px;
+  width:100%;
+  padding:12px;
+  border:1px solid #C6A769;
+  color:#C6A769;
+  background:none;
+  cursor:pointer;
+}
+
+.btn:hover{
+  background:#C6A769;
+  color:#000;
+  transform:translateY(-2px);
+}
+.btn.primary{
+  background:#C6A769;
+  color:#000;
+}
+/* AMENITIES */
+.amenities{
+  margin-top:30px;
+}
+
+.amenities ul{
+  padding-left:20px;
+}
+
+/* HOST */
+.host{
+  margin-top:40px;
+  padding:20px;
+  background:rgba(255,255,255,0.05);
+  border-radius:10px;
+}
+
+/* MOBILE */
+@media(max-width:768px){
+  .gallery{
+    grid-template-columns:1fr;
+  }
+  .info{
+    grid-template-columns:1fr;
+  }
+}
+
+.gallery img{
+  transition:0.4s;
+}
+
+.gallery img:hover{
+  transform:scale(1.03);
+}
+
+input:focus{
+  outline:none;
+  border:1px solid #C6A769;
+  background:#1a1a1a;
+}
+
+input{
+  width:100%;
+  padding:10px;
+  margin-top:10px;
+  background:#222;
+  color:#fff;
+  border:none;
+  border-radius:6px;
+  box-sizing:border-box; /* 🔥 THIS FIXES IT */
+}
+
+
+/* MAIN CALENDAR */
+.flatpickr-calendar{
+  background:rgba(20,20,20,0.95) !important;
+  backdrop-filter:blur(20px);
+  border-radius:16px;
+  box-shadow:0 30px 80px rgba(0,0,0,0.8);
+  border:1px solid rgba(255,255,255,0.08);
+  padding:10px;
+}
+
+/* HEADER */
+.flatpickr-months{
+  background:transparent !important;
+  color:#fff;
+}
+
+.flatpickr-current-month{
+  font-size:14px;
+  letter-spacing:1.5px;
+  text-transform:uppercase;
+  color:#C6A769;
+}
+/* ARROWS */
+.flatpickr-prev-month,
+.flatpickr-next-month{
+  fill:#C6A769 !important;
+}
+.flatpickr-prev-month,
+.flatpickr-next-month{
+  opacity:0.7;
+  transition:0.2s;
+}
+
+.flatpickr-prev-month:hover,
+.flatpickr-next-month:hover{
+  opacity:1;
+  transform:scale(1.1);
+}
+
+/* WEEK DAYS */
+.flatpickr-weekdays{
+  background:transparent !important;
+  color:#aaa;
+  font-size:12px;
+}
+
+/* DAYS */
+.flatpickr-day{
+  color:#ddd;
+  border-radius:8px;
+  transition:0.2s;
+}
+
+/* HOVER */
+.flatpickr-day:hover{
+  background:rgba(198,167,105,0.2);
+}
+
+/* TODAY */
+.flatpickr-day.today{
+  border:1px solid #C6A769;
+}
+
+/* SELECTED RANGE */
+.flatpickr-day.startRange,
+.flatpickr-day.endRange{
+  background:#C6A769 !important;
+  color:#000;
+  border-radius:8px;
+}
+
+.flatpickr-day.inRange{
+  background:rgba(198,167,105,0.18);
+  color:#fff;
+}
+
+/* DISABLED */
+.flatpickr-day.disabled{
+  color:#555 !important;
+  text-decoration:line-through;
+}
+
+/* INPUT FIELD ACTIVE */
+#datePicker:focus{
+  border:1px solid #C6A769;
+}
+#datePicker{
+  cursor:pointer;
+}
+
+.flatpickr-calendar.open{
+  animation:fadeCal 0.3s ease;
+}
+
+@keyframes fadeCal{
+  from{opacity:0; transform:translateY(10px);}
+  to{opacity:1; transform:translateY(0);}
+}
+#datePicker{
+  width:100%;
+  padding:10px;
+  margin-top:10px;
+  background:#222; /* ✅ same as pax */
+  color:#fff;
+  border:none;
+  border-radius:6px;
+  font-size:14px;
+}
+.flatpickr-calendar{
+  margin-top:14px;
+  padding:14px;
+  border-radius:18px;
+  box-shadow:0 40px 100px rgba(0,0,0,0.9);
+  transform:translateY(6px) scale(0.98);
+  transition:0.3s;
+}
+
+.flatpickr-calendar.open{
+  transform:translateY(0) scale(1);
+}
+.flatpickr-current-month{
+  font-size:15px;
+  letter-spacing:1px;
+}
+
+.flatpickr-day{
+  height:36px;
+  line-height:36px;
+}
+
+.flatpickr-calendar{
+  width:auto !important;
+  min-width:280px;
+}
+.flatpickr-days{
+  width:100% !important;
+}
+
+.flatpickr-rContainer{
+  width:100%;
+}
+
+.flatpickr-days{
+  padding:6px 0;
+}
+
+.flatpickr-day{
+  height:36px;
+  line-height:36px;
+  text-align:center;
+}
+
+.flatpickr-weekday{
+  text-align:center;
+}
+
+
+/* UP ARROW */
+.numInputWrapper span.arrowUp:after{
+  border-bottom-color:#C6A769 !important;
+}
+
+/* DOWN ARROW */
+.numInputWrapper span.arrowDown:after{
+  border-top-color:#C6A769 !important;
+}
+
+/* DESKTOP (keep grid) */
+@media(min-width:769px){
+  .gallery{
+    display:grid;
+    grid-template-columns:2fr 1fr 1fr;
+    gap:10px;
+  }
+
+  .gallery-track{
+    display:contents;
+  }
+}
+
+/* MOBILE SLIDER */
+@media(max-width:768px){
+
+  .gallery{
+    overflow:hidden;
+  }
+
+  .gallery-track{
+    display:flex;
+    gap:10px;
+    overflow-x:auto;
+    scroll-snap-type:x mandatory;
+    scroll-behavior:smooth;
+    -webkit-overflow-scrolling:touch;
+  }
+
+  .gallery-track img{
+    min-width:90%;
+    height:250px;
+    object-fit:cover;
+    border-radius:12px;
+    scroll-snap-align:center;
+    flex-shrink:0;
+  }
+
+  /* Hide scrollbar */
+  .gallery-track::-webkit-scrollbar{
+    display:none;
+  }
+}
+
+.gallery-track img{
+  transition:0.4s;
+}
+
+.gallery-track img:active{
+  transform:scale(0.98);
+}
+
+
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+<p style="opacity:0.6;cursor:pointer;" onclick="history.back()">
+← Back to stays
+</p>
+  <div class="header">
+    <h1>Negi Homestay</h1>
+
+<p style="opacity:0.8;">
+📍 Osla Village • 🏔️ Mountain View • 👨‍👩‍👧‍👦 Family Stay
+</p>
+
+<p style="margin-top:8px;color:#C6A769;">
+⭐ 4.8 • 32 Reviews
+</p>
+  </div>
+
+  <div class="gallery">
+  <div class="gallery-track">
+    <img src="https://images.unsplash.com/photo-1505691938895-1758d7feb511">
+    <img src="https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd">
+    <img src="https://images.unsplash.com/photo-1507089947368-19c1da9775ae">
+  </div>
+</div>
+
+  <div class="info">
+
+    <div class="details">
+      <h2>About this stay</h2>
+      <p>
+        Experience authentic Himalayan living in a traditional wooden home.
+        Wake up to mountain views and enjoy local food prepared by your hosts.
+      </p>
+      <p style="margin-top:15px;opacity:0.7;">
+8–10 km trek from Sankri • No road connectivity • Pure Himalayan experience
+</p>
+
+      <div class="amenities">
+        <h3>Amenities</h3>
+        <ul>
+          <li>Home-cooked meals</li>
+          <li>Mountain view</li>
+          <li>Local guide available</li>
+          <li>Bonfire (seasonal)</li>
+        </ul>
+      </div>
+
+      <div class="host">
+        <h3>Meet your host</h3>
+        <p>
+          The Negi family has been hosting travelers for years,
+          offering warm hospitality and deep cultural insights.
+        </p>
+         <h3>Guest Reviews</h3>
+  <p>“Amazing hospitality and breathtaking views.”</p>
+  <p>“Felt like home in the Himalayas.”</p>
+      </div>
+    </div>
+
+    <div class="booking-card">
+  <p class="price">₹2,500 / night</p>
+
+  <label style="font-size:14px;opacity:0.7;">Select Date</label>
+<input type="text" id="datePicker" placeholder="Select your stay dates">
+<p id="datePreview" style="margin-top:10px;font-size:14px;color:#C6A769;"></p>
+  <label style="font-size:14px;opacity:0.7;">Guests</label>
+<input type="number" placeholder="Guests">
+  <p style="margin-top:10px;font-size:14px;opacity:0.7;">
+    Only 2 rooms left for your dates
+  </p>
+
+  <button class="btn">Check Availability</button>
+  <button class="btn primary">Book Now</button>
+ </div>
+
+  </div>
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script>
+const bookedDates = [
+  "2026-04-10",
+  "2026-04-11",
+  "2026-04-15"
+];
+
+flatpickr("#datePicker", {
+  mode: "range",
+  minDate: "today",
+  dateFormat: "Y-m-d",
+  disable: bookedDates,
+  showMonths: 1,
+  animate: true,
+
+  onChange: function(selectedDates){
+    if(selectedDates.length === 2){
+
+      const start = selectedDates[0];
+      const end = selectedDates[1];
+
+      // 🔥 Conflict check
+      const conflict = bookedDates.some(date => {
+        let d = new Date(date);
+        return d >= start && d <= end;
+      });
+
+      if(conflict){
+        alert("Selected dates include unavailable days");
+        this.clear();
+        return;
+      }
+
+      // 🔥 Premium preview
+      document.getElementById("datePreview").innerText =
+        start.toDateString() + " → " + end.toDateString();
+    }
+  }
+});
+
+const track = document.querySelector('.gallery-track');
+
+let scrollAmount = 0;
+
+setInterval(()=>{
+  if(window.innerWidth <= 768){
+    scrollAmount += track.clientWidth * 0.9;
+
+    if(scrollAmount >= track.scrollWidth){
+      scrollAmount = 0;
+    }
+
+    track.scrollTo({
+      left: scrollAmount,
+      behavior: "smooth"
+    });
+  }
+}, 3000);
+</script>
+</body>
+</html>
