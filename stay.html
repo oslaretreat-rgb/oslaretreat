@@ -9,6 +9,69 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 <style>
+  /* STAY HERO */
+
+.stay-hero{
+  height:70vh;
+  background:url('https://pub-6585410dc85f4dda9b3ed029ed7fa049.r2.dev/osla%20homestay/oslahomestay.jpg') center/cover;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  position:relative;
+}
+
+.hero-overlay{
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(11,29,26,0.2),
+      rgba(11,29,26,0.9)
+    ),
+    radial-gradient(
+      circle at 60% 30%,
+      rgba(198,167,105,0.12),
+      transparent 60%
+    );
+}
+
+.stay-hero .hero-content{
+  position:relative;
+  text-align:center;
+  z-index:2;
+}
+
+.stay-hero h1{
+  font-family:'Playfair Display';
+  font-size:clamp(32px,5vw,54px);
+  letter-spacing:1px;
+}
+
+.stay-hero p{
+  margin-top:10px;
+  opacity:0.75;
+}
+
+.stay-hero{
+  animation:heroZoom 14s ease-in-out infinite alternate;
+}
+
+@keyframes heroZoom{
+  from{
+    background-size:105%;
+  }
+  to{
+    background-size:115%;
+  }
+}
+@media(max-width:768px){
+  .stay-hero{
+    animation:none;
+    background-size:cover;
+  }
+}
+
 body{
   margin:0;
   font-family:'Inter',sans-serif;
@@ -20,6 +83,7 @@ body{
 .container{
   max-width:1100px;
   margin:auto;
+  margin-top:30px;
   padding:20px;
 }
 
@@ -32,26 +96,17 @@ body{
   font-family:'Playfair Display';
 }
 
-/* GALLERY */
-.gallery{
-  display:grid;
-  grid-template-columns:2fr 1fr 1fr;
-  gap:10px;
-}
-
-.gallery img{
-  width:100%;
-  height:300px;
-  object-fit:cover;
-  border-radius:10px;
-}
-
 /* INFO */
 .info{
   margin-top:40px;
   display:grid;
   grid-template-columns:2fr 1fr;
   gap:40px;
+  align-items:start;
+}
+
+.details{
+  max-width:680px;
 }
 
 .details h2{
@@ -64,6 +119,98 @@ body{
 .details p{
   margin-bottom:15px;
 }
+
+/* HERO INTRO SPLIT */
+
+.hero-intro{
+  max-width:1100px;
+  margin:70px auto 30px;
+  padding:0 20px;
+
+  display:grid;
+  grid-template-columns:1fr 1.4fr;
+  gap:60px;
+  align-items:center; 
+}
+
+/* LEFT META */
+.hero-intro .stay-meta{
+  opacity:1;
+  transform:none;
+  margin:0;
+  padding:0;
+
+  border-left:1px solid rgba(198,167,105,0.18);
+  padding-left:16px;
+}
+/* RIGHT INTRO */
+.hero-intro .intro-bridge{
+  margin:0;
+  text-align:left;
+  max-width:480px;
+  font-size:15px;
+  line-height:1.9;
+  opacity:0.75;
+}
+
+/* MOBILE */
+@media(max-width:768px){
+  .hero-intro{
+    grid-template-columns:1fr;
+    gap:25px;
+    text-align:center;
+  }
+
+  .hero-intro .intro-bridge{
+    text-align:center;
+  }
+}
+
+/* BACK LINK */
+.back-link{
+  background:none;
+  letter-spacing:0.5px;
+  border:none;
+  color:#EAE3D2;
+  opacity:0.5;
+  font-size:13px;
+  cursor:pointer;
+  margin-bottom:18px;
+  transition:0.3s ease;
+}
+
+.back-link:hover{
+  opacity:1;
+  transform:translateX(-3px);
+}
+
+/* META TEXT BLOCK */
+.meta-info{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+}
+
+/* LOCATION */
+.location{
+  font-size:13px;
+  opacity:0.5;
+  letter-spacing:0.5px;
+}
+
+/* DETAILS */
+.meta-details{
+  font-size:14px;
+  opacity:0.75;
+}
+
+/* RATING */
+.rating{
+  font-size:13px;
+  color:#C6A769;
+  opacity:0.9;
+}
+
 .amenities{
   border-top:1px solid rgba(255,255,255,0.08);
   padding-top:20px;
@@ -75,13 +222,28 @@ body{
   border-radius:12px;
   backdrop-filter:blur(10px);
   position:sticky;
-  top:100px;
+  max-width:320px;
+  top:120px;
   box-shadow:0 20px 60px rgba(0,0,0,0.6);
   border:1px solid rgba(255,255,255,0.08);
 }
+@media(max-width:768px){
+  .booking-card{
+    width:100%;
+    max-width:100%;
+    margin:0;
+    padding:18px;
+    box-sizing:border-box;
+  }
+}
+.booking-card .trust{
+  margin-top:22px;
+}
 .booking-card:hover{
-  transform:translateY(-3px);
-  transition:0.3s;
+  transform:translateY(-4px);
+  box-shadow:
+    0 25px 80px rgba(0,0,0,0.8),
+    0 5px 20px rgba(0,0,0,0.4);
 }
 .price{
   color:#C6A769;
@@ -102,7 +264,7 @@ body{
 .btn:hover{
   background:#C6A769;
   color:#000;
-  transform:translateY(-2px);
+  transform:translateY(-1px);
 }
 .btn.primary{
   background:#C6A769;
@@ -117,31 +279,71 @@ body{
   padding-left:20px;
 }
 
-/* HOST */
 .host{
-  margin-top:40px;
-  padding:20px;
-  background:rgba(255,255,255,0.05);
-  border-radius:10px;
+  margin-top:50px;
+  padding-top:30px;
+  border-top:1px solid rgba(255,255,255,0.08);
+}
+
+/* layout */
+.host-inner{
+  display:flex;
+  gap:18px;
+  align-items:flex-start;
+}
+
+/* image */
+.host-inner img{
+  width:60px;
+  height:60px;
+  border-radius:50%;
+  object-fit:cover;
+  filter:grayscale(20%);
+}
+
+/* text */
+.host-name{
+  font-size:13px;
+  color:#C6A769;
+  margin-bottom:8px;
+}
+
+.host-text{
+  opacity:0.7;
+  line-height:1.7;
+}
+
+/* reviews */
+.reviews{
+  margin-top:25px;
+  padding-left:78px; /* aligns with text after image */
+  opacity:0.6;
+  font-size:14px;
+  line-height:1.7;
+}
+@media(max-width:768px){
+  .reviews{
+    padding-left:0;
+    text-align:center;
+  }
 }
 
 /* MOBILE */
 @media(max-width:768px){
-  .gallery{
-    grid-template-columns:1fr;
+  .host-inner{
+    flex-direction:column;
+    align-items:center;
+    text-align:center;
   }
+}
+
+/* MOBILE */
+@media(max-width:768px){
   .info{
     grid-template-columns:1fr;
   }
 }
 
-.gallery img{
-  transition:0.4s;
-}
-
-.gallery img:hover{
-  transform:scale(1.03);
-}
 
 input:focus{
   outline:none;
@@ -328,19 +530,6 @@ input{
   border-top-color:#C6A769 !important;
 }
 
-/* DESKTOP (keep grid) */
-@media(min-width:769px){
-  .gallery{
-    display:grid;
-    grid-template-columns:2fr 1fr 1fr;
-    gap:10px;
-  }
-
-  .gallery-track{
-    display:contents;
-  }
-}
-
 /* MOBILE SLIDER */
 @media(max-width:768px){
 
@@ -380,48 +569,232 @@ input{
   transform:scale(0.98);
 }
 
+.scarcity{
+  font-size:13px;
+  color:#C6A769;
+  opacity:0.8;
+  margin-top:10px;
+}
 
+.btn{
+  opacity:0.7;
+}
+
+.btn.primary{
+  background:#C6A769;
+  color:#000;
+  font-weight:500;
+  opacity:1;
+}
+
+.price-preview{
+  margin-top:8px;
+  font-size:14px;
+  color:#C6A769;
+  opacity:0.9;
+  animation:fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn{
+  from{opacity:0; transform:translateY(5px);}
+  to{opacity:0.9; transform:translateY(0);}
+}
+
+/* CINEMATIC GALLERY */
+
+.cinematic-gallery{
+  margin:40px auto 0;
+  max-width:1100px;
+}
+
+.gallery-track{
+  display:flex;
+  gap:16px;
+  overflow-x:auto;
+  scroll-snap-type:x mandatory;
+  padding:0;
+}
+
+/* hide scrollbar */
+.gallery-track::-webkit-scrollbar{
+  display:none;
+}
+
+/* images */
+.gallery-track img{
+  min-width:75%;
+  height:480px;
+  object-fit:cover;
+  border-radius:16px;
+  scroll-snap-align:center;
+  flex-shrink:0;
+  transition:0.5s ease;
+}
+
+/* subtle hover */
+.gallery-track img:hover{
+  transform:scale(1.02);
+}
+
+/* MOBILE */
+@media(max-width:768px){
+  .gallery-track img{
+    min-width:90%;
+    height:260px;
+  }
+}
+
+.experience{
+  margin-top:30px;
+  padding-top:20px;
+  border-top:1px solid rgba(255,255,255,0.08);
+}
+
+.experience h3{
+  font-family:'Playfair Display';
+  margin-bottom:10px;
+}
+
+.experience ul{
+  padding-left:18px;
+  opacity:0.75;
+  line-height:1.8;
+}
+
+.trust{
+  margin-top:18px;
+  font-size:13px;
+  opacity:0.6;
+  line-height:1.6;
+}
+
+.soft-divider{
+  border:none;
+  height:1px;
+  background:rgba(255,255,255,0.08);
+  margin:15px 0;
+}
+.host-inner img{
+  width:64px;
+  height:64px;
+  border-radius:50%;
+  object-fit:cover;
+  filter:grayscale(10%);
+  border:1px solid rgba(255,255,255,0.15);
+}
+.fade-in{
+  opacity:0;
+  transform:translateY(20px);
+  transition:all 0.8s ease;
+}
+
+.fade-in.visible{
+  opacity:1;
+  transform:translateY(0);
+}
+
+@media(max-width:768px){
+  .hero-intro{
+    display:flex;
+    flex-direction:column;
+  }
+
+  .intro-bridge{
+    order:1;
+  }
+
+  .stay-meta{
+    order:2;
+  }
+}
 
 </style>
 </head>
 
 <body>
+<section class="stay-hero">
+  <div class="hero-overlay"></div>
 
-<div class="container">
-<p style="opacity:0.6;cursor:pointer;" onclick="history.back()">
-← Back to stays
-</p>
-  <div class="header">
+  <div class="hero-content">
     <h1>Osla Homestay</h1>
+    <p>A quiet Himalayan escape</p>
+  </div>
+</section>
+<div class="container">
+<div class="hero-intro">
 
-<p style="opacity:0.8;">
-📍 Osla Village • 🏔️ Mountain View • 👨‍👩‍👧‍👦 Family Stay
-</p>
+  <!-- LEFT -->
+  <div class="stay-meta">
+    <button class="back-link" onclick="history.back()">
+      ← Back
+    </button>
 
-<p style="margin-top:8px;color:#C6A769;">
-⭐ 4.8 • 32 Reviews
-</p>
+    <div class="meta-info">
+      <p class="location">Osla Village • Uttarakhand</p>
+      <p class="meta-details">
+        Mountain View • Family Hosted Stay
+      </p>
+      <p class="rating">
+        4.8 • 32 reviews
+      </p>
+    </div>
   </div>
 
-  <div class="gallery">
-  <div class="gallery-track">
-    <img src="https://images.unsplash.com/photo-1505691938895-1758d7feb511">
-    <img src="https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd">
-    <img src="https://images.unsplash.com/photo-1507089947368-19c1da9775ae">
+  <!-- RIGHT -->
+  <div class="intro-bridge">
+    <p>
+      Tucked deep within the Himalayas, Osla is not a destination you arrive at —
+      it is one you slowly reach.
+    </p>
+
+    <p>
+      A place where the journey matters as much as the stay,
+      and silence becomes part of your experience.
+    </p>
   </div>
+
 </div>
+  <section class="cinematic-gallery">
+  <div class="gallery-track">
 
+    <img src="https://pub-6585410dc85f4dda9b3ed029ed7fa049.r2.dev/osla%20homestay/homestay2.jpg">
+    <img src="https://pub-6585410dc85f4dda9b3ed029ed7fa049.r2.dev/osla%20homestay/home%20stay%201.jpg">
+    <img src="https://pub-6585410dc85f4dda9b3ed029ed7fa049.r2.dev/osla%20homestay/homestay3.jpg">
+
+  </div>
+</section>
   <div class="info">
 
     <div class="details">
       <h2>About this stay</h2>
-      <p>
-        Experience authentic Himalayan living in a traditional wooden home.
-        Wake up to mountain views and enjoy local food prepared by your hosts.
-      </p>
-      <p style="margin-top:15px;opacity:0.7;">
-8–10 km trek from Sankri • No road connectivity • Pure Himalayan experience
+
+<p>
+Far from roads and noise, Osla is a village where time moves differently.
+Mornings arrive slowly, with soft light touching wooden homes and distant peaks.
 </p>
+
+<p>
+Here, your stay is not defined by rooms, but by moments — 
+shared meals by the fire, quiet walks through forests, and conversations that linger.
+</p>
+
+<p style="opacity:0.7;">
+An 8–10 km trek from Sankri • No road connectivity • A truly off-grid experience
+</p>
+
+<div class="experience">
+  <h3>What makes this stay special</h3>
+
+  <ul>
+    <li>Wake up to the stillness of the Supin valley</li>
+    <li>Home-cooked meals prepared over firewood</li>
+    <li>Evenings under a sky full of stars</li>
+    <li>Guided walks through forests and village paths</li>
+  </ul>
+</div>
+
+
+
 
       <div class="amenities">
         <h3>Amenities</h3>
@@ -434,15 +807,30 @@ input{
       </div>
 
       <div class="host">
-        <h3>Meet your host</h3>
-        <p>
-          The Rana family has been hosting travelers for years,
-          offering warm hospitality and deep cultural insights.
-        </p>
-         <h3>Guest Reviews</h3>
-  <p>“Amazing hospitality and breathtaking views.”</p>
-  <p>“Felt like home in the Himalayas.”</p>
-      </div>
+
+  <div class="host-inner">
+
+    <img src="https://pub-6585410dc85f4dda9b3ed029ed7fa049.r2.dev/ganga1.jpg" alt="Host">
+
+    <div class="host-info">
+      <h3>Meet your host</h3>
+      <p class="host-name">Ganga Rana • Hosting since 2012</p>
+
+      <p class="host-text">
+        Guests arrive as visitors, but leave as family.
+        The Rana family has welcomed travelers into their home for over a decade,
+        sharing stories, meals, and the rhythms of village life.
+      </p>
+    </div>
+
+  </div>
+
+  <div class="reviews">
+    <p>“The warmth of the hosts made this unforgettable.”</p>
+    <p>“Felt like home in the Himalayas.”</p>
+  </div>
+
+</div>
     </div>
 
     <div class="booking-card">
@@ -453,12 +841,16 @@ input{
 <p id="datePreview" style="margin-top:10px;font-size:14px;color:#C6A769;"></p>
   <label style="font-size:14px;opacity:0.7;">Guests</label>
 <input type="number" placeholder="Guests">
-  <p style="margin-top:10px;font-size:14px;opacity:0.7;">
-    Only 2 rooms left for your dates
-  </p>
-
+  <p class="scarcity">Only 2 rooms left for these dates</p>
+<p id="pricePreview" class="price-preview"></p>
+<hr class="soft-divider">
   <button class="btn">Check Availability</button>
   <button class="btn primary">Book Now</button>
+  <div class="trust">
+  <p>✓ Verified local homestay</p>
+  <p>✓ Secure booking experience</p>
+  <p>✓ On-ground support in Sankri & Osla</p>
+</div>
  </div>
 
   </div>
@@ -466,6 +858,22 @@ input{
 </div>
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 <script>
+  const elements = document.querySelectorAll(
+  '.cinematic-gallery, .details, .booking-card, .host'
+);
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting){
+      entry.target.classList.add('visible');
+    }
+  });
+});
+
+elements.forEach(el => {
+  el.classList.add('fade-in');
+  observer.observe(el);
+});
+
 const bookedDates = [
   "2026-04-10",
   "2026-04-11",
@@ -481,48 +889,45 @@ flatpickr("#datePicker", {
   animate: true,
 
   onChange: function(selectedDates){
-    if(selectedDates.length === 2){
+  if(selectedDates.length === 2){
 
-      const start = selectedDates[0];
-      const end = selectedDates[1];
+    const start = selectedDates[0];
+    const end = selectedDates[1];
 
-      // 🔥 Conflict check
-      const conflict = bookedDates.some(date => {
-        let d = new Date(date);
-        return d >= start && d <= end;
-      });
+    const nights = Math.ceil((end - start) / (1000 * 60 * 60 * 24));
 
-      if(conflict){
-        alert("Selected dates include unavailable days");
-        this.clear();
-        return;
-      }
+    // conflict check
+    const conflict = bookedDates.some(date => {
+      let d = new Date(date);
+      return d >= start && d <= end;
+    });
 
-      // 🔥 Premium preview
-      document.getElementById("datePreview").innerText =
-        start.toDateString() + " → " + end.toDateString();
+    if(conflict){
+      alert("Selected dates include unavailable days");
+      this.clear();
+      return;
     }
+if(nights <= 0){
+  this.clear();
+  document.getElementById("pricePreview").innerText = "";
+  return;
+}
+    document.getElementById("datePreview").innerText =
+      start.toDateString() + " → " + end.toDateString();
+
+    // 💰 price calculation
+    const pricePerNight = 2500;
+    const total = nights * pricePerNight;
+
+    document.getElementById("pricePreview").innerText =
+      `${nights} nights • ₹${total.toLocaleString()} total`;
   }
+}
 });
 
 const track = document.querySelector('.gallery-track');
 
-let scrollAmount = 0;
 
-setInterval(()=>{
-  if(window.innerWidth <= 768){
-    scrollAmount += track.clientWidth * 0.9;
-
-    if(scrollAmount >= track.scrollWidth){
-      scrollAmount = 0;
-    }
-
-    track.scrollTo({
-      left: scrollAmount,
-      behavior: "smooth"
-    });
-  }
-}, 3000);
 </script>
 </body>
 </html>
