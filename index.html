@@ -726,6 +726,89 @@ body::after{
   0%,100%{ transform:translateY(0); }
   50%{ transform:translateY(-1.5px); }
 }
+
+/* AMAN STYLE FOOTER */
+
+.footer-aman{
+  margin-top:120px;
+  padding:120px 20px 40px;
+  text-align:center;
+  position:relative;
+}
+
+/* ultra subtle divider */
+.footer-aman::before{
+  content:"";
+  position:absolute;
+  top:0;
+  left:50%;
+  transform:translateX(-50%);
+  width:120px;
+  height:1px;
+  background:rgba(198,167,105,0.25);
+}
+
+/* BRAND */
+.footer-aman h2{
+  font-family:'Playfair Display';
+  font-size:20px;
+  letter-spacing:5px;
+  margin-bottom:18px;
+}
+
+/* POETIC LINE */
+.footer-line{
+  font-size:14px;
+  opacity:0.55;
+  line-height:1.8;
+  margin-bottom:35px;
+}
+
+/* NAV (almost invisible) */
+.footer-nav{
+  display:flex;
+  justify-content:center;
+  gap:28px;
+  flex-wrap:wrap;
+}
+
+.footer-nav a{
+  text-decoration:none;
+  color:#EAE3D2;
+  font-size:12px;
+  opacity:0.45;
+  letter-spacing:1px;
+  transition:0.3s ease;
+}
+
+.footer-nav a:hover{
+  opacity:0.9;
+  color:#C6A769;
+}
+
+/* BOTTOM */
+.footer-bottom{
+  margin-top:70px;
+  font-size:11px;
+  opacity:0.35;
+}
+
+/* MOBILE */
+@media(max-width:768px){
+
+  .footer-aman{
+    padding:90px 20px 30px;
+  }
+
+  .footer-line{
+    font-size:13px;
+  }
+
+  .footer-nav{
+    gap:20px;
+  }
+
+}
 </style>
 </head>
 
@@ -974,8 +1057,28 @@ body::after{
   </p>
 </section>
 
-<footer>
-  <p>© 2026 Osla Retreat • All Rights Reserved.</p>
+<footer class="footer-aman">
+  <div class="footer-center">
+
+    <h2>OSLA RETREAT</h2>
+
+    <p class="footer-line">
+      In the quiet of the mountains,  
+      time begins to slow.
+    </p>
+
+    <div class="footer-nav">
+      <a href="#">Home</a>
+      <a href="#">Stays</a>
+      <a href="#">Experience</a>
+      <a href="#">Contact</a>
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    <p>© 2026 Osla Retreat</p>
+  </div>
 </footer>
 <script>
 function goToStay(e){
