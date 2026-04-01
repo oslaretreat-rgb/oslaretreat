@@ -325,10 +325,6 @@ border-bottom:1px solid rgba(255,255,255,0.05);
   transition:all 0.2s ease;
 }
 
-.card:active::after{
-  border:1px solid #C6A769;
-}
-
 .card:hover{
   transform:translateY(-10px) scale(1.02);
   box-shadow:0 25px 60px rgba(0,0,0,0.6);
@@ -649,8 +645,12 @@ body::after{
 
 
 .card:active{
-  transform:scale(0.985);
   transition:transform 0.1s ease;
+}
+@media(min-width:769px){
+  .card:active{
+    transform:scale(0.985);
+  }
 }
 
 .card.clicked::after{
@@ -1087,6 +1087,7 @@ function goToStay(e){
   card.classList.add("clicked");
 
   setTimeout(()=>{
+    card.classList.remove("clicked"); // 👈 ADD THIS
     window.location.href = "stay.html";
   }, 150);
 }
@@ -1162,6 +1163,11 @@ window.addEventListener("load", () => {
   }, 1200); // loader duration
 });
 
+window.addEventListener("pageshow", () => {
+  document.querySelectorAll('.card').forEach(card=>{
+    card.classList.remove('clicked');
+  });
+});
 </script>
 <script>
 document.querySelectorAll("a").forEach(link=>{
