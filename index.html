@@ -63,7 +63,8 @@ nav h1{
 
 /* HERO */
 .hero{
-  height:100vh;
+  min-height:100svh; /* 🔥 modern fix */
+  height:auto;
   background:url('https://pub-6585410dc85f4dda9b3ed029ed7fa049.r2.dev/osla.jpg') center/cover;
   background-attachment: fixed;
   display:flex;
@@ -464,11 +465,16 @@ nav.scrolled{
 
 .story-block{
   position:relative;
-  height:90vh;
+  min-height:70vh;
   display:flex;
   align-items:center;
   justify-content:center;
   overflow:hidden;
+}
+@media(max-width:768px){
+  .story-block{
+    min-height:55vh;
+  }
 }
 
 .story-bg{
@@ -605,8 +611,8 @@ iframe{
 
 
   .hero::before{
-    display:none; /* remove extra lighting */
-  }
+  opacity:0.6; /* reduce, don’t remove */
+}
 
 }
 @media(max-width:768px){
@@ -701,7 +707,13 @@ body::after{
   font-size:13px;
   opacity:0.7;
 }
-
+@media(max-width:768px){
+  .weather-widget{
+    top:90px;
+    right:20px;
+    transform:scale(0.9);
+  }
+}
 /* ICON ANIMATION (SUBTLE) */
 
 .icon{
@@ -1006,16 +1018,18 @@ window.addEventListener("scroll", () => {
     window.requestAnimationFrame(() => {
 
       // Parallax for story
-      document.querySelectorAll(".story-block").forEach(block => {
-        const img = block.querySelector(".story-bg");
-        const rect = block.getBoundingClientRect();
-        img.style.transform = `translateY(${rect.top * 0.2}px) scale(1.1)`;
-      });
-
+      if(window.innerWidth > 768){
+  document.querySelectorAll(".story-block").forEach(block => {
+    const img = block.querySelector(".story-bg");
+    const rect = block.getBoundingClientRect();
+    img.style.transform = `translateY(${rect.top * 0.2}px) scale(1.1)`;
+  });
+}
       // Hero parallax
       const hero = document.querySelector(".hero");
-      hero.style.backgroundPositionY = window.scrollY * 0.4 + "px";
-
+      if(window.innerWidth > 768){
+  hero.style.backgroundPositionY = window.scrollY * 0.4 + "px";
+}
       // Navbar effect
       const nav = document.querySelector("nav");
       if(window.scrollY > 50){
