@@ -279,63 +279,11 @@ body{
   padding-left:20px;
 }
 
-.host{
-  margin-top:50px;
-  padding-top:30px;
-  border-top:1px solid rgba(255,255,255,0.08);
-}
 
-/* layout */
-.host-inner{
-  display:flex;
-  gap:18px;
-  align-items:flex-start;
-}
 
-/* image */
-.host-inner img{
-  width:60px;
-  height:60px;
-  border-radius:50%;
-  object-fit:cover;
-  filter:grayscale(20%);
-}
 
-/* text */
-.host-name{
-  font-size:13px;
-  color:#C6A769;
-  margin-bottom:8px;
-}
-
-.host-text{
-  opacity:0.7;
-  line-height:1.7;
-}
-
-/* reviews */
-.reviews{
-  margin-top:25px;
-  padding-left:78px; /* aligns with text after image */
-  opacity:0.6;
-  font-size:14px;
-  line-height:1.7;
-}
-@media(max-width:768px){
-  .reviews{
-    padding-left:0;
-    text-align:center;
-  }
-}
 
 /* MOBILE */
-@media(max-width:768px){
-  .host-inner{
-    flex-direction:column;
-    align-items:center;
-    text-align:center;
-  }
-}
 
 /* MOBILE */
 @media(max-width:768px){
@@ -674,14 +622,7 @@ input{
   background:rgba(255,255,255,0.08);
   margin:15px 0;
 }
-.host-inner img{
-  width:64px;
-  height:64px;
-  border-radius:50%;
-  object-fit:cover;
-  filter:grayscale(10%);
-  border:1px solid rgba(255,255,255,0.15);
-}
+
 .fade-in{
   opacity:0;
   transform:translateY(20px);
@@ -707,6 +648,136 @@ input{
     order:2;
   }
 }
+
+@media(max-width:768px){
+
+  .info{
+    display:flex !important;   /* 🔥 FORCE override grid */
+    flex-direction:column;
+  }
+   .details{
+    order:1;
+  }
+
+  .booking-card{
+    order:2;
+  }
+
+  .host-section{
+    order:3;
+  }
+
+}
+@media(max-width:768px){
+  .booking-card{
+    position:relative;
+    top:auto;
+  }
+}
+
+
+
+.section-heading{
+  font-family:'Playfair Display';
+  font-size:22px;
+  margin-bottom:20px;
+}
+
+
+/* HOST SECTION */
+
+.host-section{
+  width:100%;
+  max-width:680px;
+  padding-top:30px;
+  border-top:1px solid rgba(255,255,255,0.08);
+}
+
+/* heading */
+.section-heading{
+  font-family:'Playfair Display';
+  font-size:22px;
+  margin-bottom:18px;
+}
+
+/* layout */
+.host-inner{
+  display:flex;
+  gap:20px;
+  align-items:center;
+}
+
+/* image */
+.host-inner img{
+  width:64px;
+  height:64px;
+  border-radius:50%;
+  object-fit:cover;
+  border:1px solid rgba(255,255,255,0.15);
+}
+
+/* text */
+.host-name{
+  font-size:16px;
+  font-weight:500;
+  color:#C6A769;
+  margin-bottom:6px;
+}
+
+.host-name span{
+  font-size:13px;
+  opacity:0.6;
+  margin-left:6px;
+}
+
+.host-text{
+  font-size:14px;
+  line-height:1.7;
+  opacity:0.75;
+  max-width:540px;
+}
+
+
+
+
+.reviews{
+  margin-top:20px;
+  max-width:480px;
+}
+
+.review{
+  margin-bottom:16px;
+  padding-left:14px;
+  border-left:1.5px solid rgba(198,167,105,0.25);
+}
+
+.review p{
+  font-size:14px;
+  line-height:1.7;
+  opacity:0.65;
+  margin:0;
+}
+
+@media(max-width:768px){
+
+  .host-section{
+    border-top:none;
+    padding-top:0;
+    max-width:100%;
+  }
+  
+
+  .host-inner{
+    flex-direction:column;
+    align-items:flex-start;
+    gap:5px; /* 🔥 reduce from 20px → 10px */
+  }
+  .reviews{
+    max-width:100%;
+  }
+
+}
+
 
 </style>
 </head>
@@ -763,8 +834,7 @@ input{
 
   </div>
 </section>
-  <div class="info">
-
+<div class="info stay-layout">
     <div class="details">
       <h2>About this stay</h2>
 
@@ -806,31 +876,9 @@ An 8–10 km trek from Sankri • No road connectivity • A truly off-grid expe
         </ul>
       </div>
 
-      <div class="host">
 
-  <div class="host-inner">
+    
 
-    <img src="https://pub-6585410dc85f4dda9b3ed029ed7fa049.r2.dev/ganga1.jpg" alt="Host">
-
-    <div class="host-info">
-      <h3>Meet your host</h3>
-      <p class="host-name">Ganga Rana • Hosting since 2012</p>
-
-      <p class="host-text">
-        Guests arrive as visitors, but leave as family.
-        The Rana family has welcomed travelers into their home for over a decade,
-        sharing stories, meals, and the rhythms of village life.
-      </p>
-    </div>
-
-  </div>
-
-  <div class="reviews">
-    <p>“The warmth of the hosts made this unforgettable.”</p>
-    <p>“Felt like home in the Himalayas.”</p>
-  </div>
-
-</div>
     </div>
 
     <div class="booking-card">
@@ -852,15 +900,48 @@ An 8–10 km trek from Sankri • No road connectivity • A truly off-grid expe
   <p>✓ On-ground support in Sankri & Osla</p>
 </div>
  </div>
+<div class="host-section">
+<h2 class="section-heading">Meet your host</h2>
+  <div class="host-inner">
 
+    <img src="https://pub-6585410dc85f4dda9b3ed029ed7fa049.r2.dev/ganga1.jpg" alt="Host">
+
+    <div class="host-info">
+
+<h3 class="host-name">
+  Ganga Rana
+  <span>• Hosting since 2012</span>
+</h3>
+
+<p class="host-text">
+  Guests arrive as visitors, but leave as family.
+  The Rana family has welcomed travelers into their home for over a decade,
+  sharing stories, meals, and the rhythms of village life.
+</p>
+    </div>
+
+  </div>
+
+  <div class="reviews">
+
+  <div class="review">
+    <p>“The warmth of the hosts made this unforgettable.”</p>
+  </div>
+
+  <div class="review">
+    <p>“Felt like home in the Himalayas.”</p>
+  </div>
+
+</div>
+
+</div>
   </div>
 
 </div>
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 <script>
   const elements = document.querySelectorAll(
-  '.cinematic-gallery, .details, .booking-card, .host'
-);
+'.cinematic-gallery, .details, .booking-card, .host-section');
 const observer = new IntersectionObserver(entries => {
   entries.forEach(entry => {
     if(entry.isIntersecting){
